@@ -20,4 +20,4 @@ class Post(models.Model):
     blog_photo = models.CharField(max_length=500)
     published_at = models.DateTimeField("date published")
     def __str__(self):
-        return self.text
+        return self.title
