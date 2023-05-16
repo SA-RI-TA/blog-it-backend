@@ -9,7 +9,9 @@ class User(models.Model):
     password = models.CharField(max_length=200)
     date_of_birth = models.DateTimeField("")
     profile_picture = models.CharField(max_length=500)
-
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
+    
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -17,3 +19,5 @@ class Post(models.Model):
     text = models.TextField()
     blog_photo = models.CharField(max_length=500)
     published_at = models.DateTimeField("date published")
+    def __str__(self):
+        return self.text
