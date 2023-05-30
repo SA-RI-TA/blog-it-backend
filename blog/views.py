@@ -1,13 +1,19 @@
 from django.http import HttpResponse
 
 from .models import Post
+
+
 def index(request):
-    return HttpResponse("Hello, world. You're at the blog index.")
+    latest_post_list = Post.objects.order_by("-published_at")[:5]
+    output = ", ".join([p.text for p in latest_post_list])
+    return HttpResponse(output)
+
 
 def posts(request):
     latest_post_list = Post.objects.order_by("-published_at")
     output = ",<br />".join([q.title for q in latest_post_list])
     return HttpResponse(output)
+
 
 def detail(request, post_id):
     return HttpResponse("You're looking at post %s." % post_id)
@@ -20,6 +26,7 @@ def results(request, post_id):
 
 def vote(request, post_id):
     return HttpResponse("You're voting on post %s." % post_id)
+
 
 def test(request, post_id):
     return HttpResponse("This is a test")
